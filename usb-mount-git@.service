@@ -4,6 +4,6 @@ Description=Mount USB Drive on %i and symlink contents
 [Service]
 Type=oneshot
 RemainAfterExit=true
-ExecStart=/bin/sh -c "/usr/bin/pmount --umask 000 /dev/%i \"$(/usr/bin/lsblk --fs | grep %i | awk '{print $3}')\"; cd /opt/git; for i in `ls -1d /media/*/*.git`; do ln -s "$i" 2>/dev/null || true; done; unlink /opt/git/new; ln -s `df | grep /media/ | sort -nrk4 | head -n1 | awk '{print $NF}'` /opt/git/new 2>/dev/null; ls /opt/git/new || unlink /opt/git/new; ln -s /media/local /opt/git/new 2>/dev/null || true"
-ExecStop=/bin/sh -c "/usr/bin/pumount /dev/%i; cd /opt/git; unlink /opt/git/new; ln -s `df | grep /media/ | sort -nrk4 | head -n1 | awk '{print $NF}'` /opt/git/new 2>/dev/null; ls /opt/git/new || unlink /opt/git/new; ln -s /media/local /opt/git/new 2>/dev/null || true"
+ExecStart=/bin/sh -c "/usr/bin/pmount --umask 000 /dev/%i \"$(/usr/bin/lsblk --fs | grep %i | awk '{print $3}')\"; cd /opt/git; for i in `ls -1d /media/*/*.git`; do ln -s "$i" 2>/dev/null || true; done; /home/pi/git-server/usb-mount-git/usb-mount-git-symlinks.sh || true"
+ExecStop=/bin/sh -c "/usr/bin/pumount /dev/%i; cd /opt/git; /home/pi/git-server/usb-mount-git/usb-mount-git-symlinks.sh || true"
 

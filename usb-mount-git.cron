@@ -1,6 +1,2 @@
 * * * * * ( /bin/sh -c "/home/pi/git-server/usb-mount-git/usb-mount-git-symlinks.sh" )
-* * * * * ( sleep 10 ; /bin/sh -c "/home/pi/git-server/usb-mount-git/usb-mount-git-symlinks.sh" )
-* * * * * ( sleep 20 ; /bin/sh -c "/home/pi/git-server/usb-mount-git/usb-mount-git-symlinks.sh" )
 * * * * * ( sleep 30 ; /bin/sh -c "/home/pi/git-server/usb-mount-git/usb-mount-git-symlinks.sh" )
-* * * * * ( sleep 40 ; /bin/sh -c "/home/pi/git-server/usb-mount-git/usb-mount-git-symlinks.sh" )
-* * * * * ( sleep 50 ; /bin/sh -c "/home/pi/git-server/usb-mount-git/usb-mount-git-symlinks.sh" )
