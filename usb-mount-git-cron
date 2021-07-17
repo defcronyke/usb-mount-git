@@ -1,2 +1,2 @@
-* * * * * ( /bin/sh -c "/home/pi/git-server/usb-mount-git/usb-mount-git-symlinks.sh" )
-* * * * * ( sleep 30 ; /bin/sh -c "/home/pi/git-server/usb-mount-git/usb-mount-git-symlinks.sh" )
+* * * * *	root	( /bin/sh -c "/home/pi/git-server/usb-mount-git/usb-mount-git-symlinks.sh" )
+* * * * *	root	( sleep 30 ; /bin/sh -c "/home/pi/git-server/usb-mount-git/usb-mount-git-symlinks.sh" )
