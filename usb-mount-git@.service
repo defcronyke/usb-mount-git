@@ -4,6 +4,6 @@ Description=Mount USB Drive on %i and symlink contents
 [Service]
 Type=oneshot
 RemainAfterExit=true
-ExecStart=/bin/sh -c "/usr/bin/pmount --umask 000 /dev/%i \"$(/usr/bin/lsblk --fs | grep %i | awk '{print $3}')\"; mkdir -p /opt/git; chown pi: /opt/git; cd /opt/git; for i in `ls -1d /media/*/*.git`; do ln -s "$i" 2>/dev/null || true; done; ln -s `df | grep /media/ | sort -nrk4 | head -n1 | awk '{print $NF}'` new 2>/dev/null || true"
+ExecStart=/bin/sh -c "/usr/bin/pmount --umask 000 /dev/%i \"$(/usr/bin/lsblk --fs | grep %i | awk '{print $3}')\"; cd /opt/git; for i in `ls -1d /media/*/*.git`; do ln -s "$i" 2>/dev/null || true; done; ln -s `df | grep /media/ | sort -nrk4 | head -n1 | awk '{print $NF}'` new 2>/dev/null || true"
 ExecStop=/usr/bin/pumount /dev/%i
 
