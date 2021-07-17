@@ -1,6 +1,7 @@
 #!/bin/sh
 
 sudo mkdir -p /opt/git
+sudo chown $USER: /opt/git
 ln -s /opt/git $HOME/git 2>/dev/null
 sudo cp -f usb-mount-git@.service /etc/systemd/system/
 sudo cp -f 99-usb-mount-git.rules /etc/udev/rules.d/
