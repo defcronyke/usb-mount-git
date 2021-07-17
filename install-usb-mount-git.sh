@@ -2,7 +2,7 @@
 
 sudo mkdir -p /opt/git
 sudo chown $USER: /opt/git
-if [ ! -f "$HOME/git" ]; then
+if [ ! -d "$HOME/git" ]; then
 	ln -s /opt/git $HOME/git 2>/dev/null
 fi
 sudo cp -f usb-mount-git@.service /etc/systemd/system/
