@@ -6,7 +6,9 @@ cd /opt/git
 for i in `ls -1d /media/*/*.git`; do ln -s "$i" 2>/dev/null || true; done
 
 # Add symlinks for all folders under /media/ to /opt/git/
-for i in `ls -1d /media`; do
+sudo ln -s /media /opt/git/media 2>/dev/null || true
+
+for i in `ls -1d /media/*`; do
 	sudo ln -s "$i" 2>/dev/null || true
 done
 
