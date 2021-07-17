@@ -3,7 +3,8 @@
 cd /opt/git
 
 # Add symlinks for all "*.git/" folders on usb disks to /opt/git/
-for i in `ls -1d /media/*/*.git`; do ln -s "$i" 2>/dev/null || true; done
+for i in `find /media -type d -name "*.git" 2>/dev/null | sed 's/\/.git$//g'`; do ln -s "$i" 2>/dev/null || true; done
+#for i in `ls -1d /media/*/*.git`; do ln -s "$i" 2>/dev/null || true; done
 
 # Add symlinks for all folders under /media/ to /opt/git/
 sudo ln -s /media /opt/git/media 2>/dev/null || true
