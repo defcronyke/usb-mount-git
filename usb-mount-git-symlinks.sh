@@ -9,5 +9,6 @@ unlink /opt/git/new; ln -s `df | grep /media/ | sort -nrk4 | head -n1 | awk '{pr
 sudo chown -R pi: /home/pi/git/.git/gitweb
 sudo chown pi: /home/pi/git/.git/pid
 
-sudo su -s /bin/bash -c "GIT_DISCOVERY_ACROSS_FILESYSTEM=1 git instaweb --restart" -g pi pi
+sudo su -s /bin/bash -c "git instaweb --restart" -g pi pi
+#sudo su -s /bin/bash -c "GIT_DISCOVERY_ACROSS_FILESYSTEM=1 git instaweb --restart" -g pi pi
 
