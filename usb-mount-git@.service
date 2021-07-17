@@ -1,0 +1,9 @@
+[Unit]
+Description=Mount USB Drive on %i and symlink contents
+
+[Service]
+Type=oneshot
+RemainAfterExit=true
+ExecStart=/bin/sh -c "/usr/bin/pmount --umask 000 /dev/%i \"$(/usr/bin/lsblk --fs | grep %i | awk '{print $3}')\"; mkdir -p /opt/git; cd /opt/git; for i in `basename -a $(ls -1d */* | grep -v "lost+found") | sort | uniq`; do ln -s "$i" 2>/dev/null; done"
+ExecStop=/usr/bin/pumount /dev/%i
+
