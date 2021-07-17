@@ -10,5 +10,5 @@ sudo cp -f 99-usb-mount-git.rules /etc/udev/rules.d/
 sudo udevadm control --reload-rules && sudo udevadm trigger
 sudo systemctl daemon-reload
 
-sudo cp -f usb-mount-git.cron /etc/cron.d/
+sudo cp -f usb-mount-git-cron /etc/cron.d/
 
