@@ -4,6 +4,5 @@ Description=Mount USB Drive on %i and symlink contents
 [Service]
 Type=oneshot
 RemainAfterExit=true
-ExecStart=/bin/sh -c "/usr/bin/pmount -e --umask 000 /dev/%i \"$(/usr/bin/lsblk --fs | grep %i | awk '{print $3}')\"; cd /opt/git; for i in `ls -1d /media/*/*.git`; do ln -s "$i" 2>/dev/null || true; done; /home/pi/git-server/usb-mount-git/usb-mount-git-symlinks.sh || true"
+ExecStart=/bin/sh -c "/usr/bin/pmount -e --umask 000 /dev/%i \"$(/usr/bin/lsblk -o NAME,LABEL | grep %i | awk '{print $2}')\"; cd /opt/git; for i in `ls -1d /media/*/*.git`; do ln -s "$i" 2>/dev/null || true; done; /home/pi/git-server/usb-mount-git/usb-mount-git-symlinks.sh || true"
 ExecStop=/bin/sh -c "/usr/bin/pumount /dev/%i; cd /opt/git; /home/pi/git-server/usb-mount-git/usb-mount-git-symlinks.sh || true"
-

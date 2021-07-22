@@ -6,17 +6,19 @@ usb_mount_git_symlinks() {
   # Force-unmount dead mountpoints found in /media
   echo "Checking if any mount points under /media are dead or inaccessible..."
 
-  for i in `lsblk | awk '{print $7}' | tail -n +2 | grep "/media/"`; do
+  for i in `lsblk -o MOUNTPOINT | grep "/media/"`; do
+    echo ""
     ls "$i"
+    echo ""
 
     if [ $? -ne 0 ]; then
       echo "Broken or inaccessible mount point detected in /media, so we're force-unmounting it in case it's stuck: $i" && \
       sudo umount -f "$i" && \
       echo "Attempting to re-mount it once, but if it fails we won't try again." && \
       sudo mount "`mount | grep "$i" | awk '{print $1}'`" "$i"
-
-      if [ $? -ne 0 ]; then
-        echo "Re-mounting dead or inaccessible mount point failed: $i"
+      res_code=$?
+      if [ $res_code -ne 0 ]; then
+        echo "Re-mounting dead or inaccessible mount point failed ( error code: $res_code ): $i"
       fi
     fi
   done
