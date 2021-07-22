@@ -6,12 +6,18 @@ cd /opt/git
 echo "Checking if any mount points under /media are dead or inaccessible..."
 
 for i in `lsblk | awk '{print $7}' | tail -n +2 | grep "/media/"`; do
-  ls "$i" || \
-  echo "Broken or inaccessible mount point detected in /media, so we're force-unmounting it in case it's stuck: $i" && \
-  sudo umount -f "$i" && \
-  echo "Attempting to re-mount it once, but if it fails we won't try again." && \
-  sudo mount "`mount | grep "$i" | awk '{print $1}'`" "$i" || \
-  echo "Re-mounting dead or inaccessible mount point failed: $i"
+  ls "$i"
+
+  if [ $? -ne 0 ]; then
+    echo "Broken or inaccessible mount point detected in /media, so we're force-unmounting it in case it's stuck: $i" && \
+    sudo umount -f "$i" && \
+    echo "Attempting to re-mount it once, but if it fails we won't try again." && \
+    sudo mount "`mount | grep "$i" | awk '{print $1}'`" "$i"
+
+    if [ $? -ne 0 ]; then
+      echo "Re-mounting dead or inaccessible mount point failed: $i"
+    fi
+  fi
 done
 
 # Add symlinks for all "*.git/" folders on usb disks to /opt/git/
