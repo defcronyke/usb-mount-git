@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/usr/bin/env bash
 
 usb_mount_git_symlinks() {
   cd /opt/git

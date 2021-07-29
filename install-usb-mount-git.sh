@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/usr/bin/env bash
 
 install_usb_mount_git() {
   sudo groupadd $USER 2>/dev/null
