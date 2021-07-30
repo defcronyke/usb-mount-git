@@ -11,7 +11,7 @@ install_usb_mount_git() {
 
   cat usb-mount-git@.service.tmpl | \
   sed "s/{USER}/$USER/g" | \
-  tee /etc/systemd/system/usb-mount-git@.service
+  sudo tee /etc/systemd/system/usb-mount-git@.service
 
   sudo cp -f 99-usb-mount-git.rules /etc/udev/rules.d/
   sudo udevadm control --reload-rules && sudo udevadm trigger
