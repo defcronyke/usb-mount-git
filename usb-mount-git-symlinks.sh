@@ -34,7 +34,7 @@ usb_mount_git_symlinks() {
   done
 
   # Fix permissions on folders under ~/git/
-  sudo chown -hR $USER: $HOME/git/*
+  sudo chown -hR $USER: $HOME/git
 
   # Update symlink for /opt/git/new/ to point to usb disk with most free space available.
   unlink /opt/git/new; ln -s `df | grep /media/ | sort -nrk4 | head -n1 | awk '{print $NF}'` /opt/git/new 2>/dev/null; ls /opt/git/new || unlink /opt/git/new; ln -s /media/local /opt/git/new 2>/dev/null || true
