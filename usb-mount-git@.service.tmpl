@@ -5,5 +5,5 @@ Description=Mount USB Drive on %i and symlink contents
 Type=oneshot
 User={USER}
 RemainAfterExit=true
-ExecStart=/bin/sh -c "/usr/bin/pmount -e --umask 000 /dev/%i \"$(/usr/bin/lsblk -o NAME,LABEL | grep %i | awk '{print $2}')\"; cd /opt/git; for i in `ls -1d /media/*/*.git`; do ln -s "$i" 2>/dev/null || true; done; /etc/cron.d/usb-mount-git-symlinks.sh || true"
+ExecStart=/bin/sh -c "/usr/bin/pmount -e --umask 000 /dev/%i \"$(/usr/bin/lsblk -o NAME,LABEL | grep %i | awk '{print $2}')\"; cd /opt/git; for i in `ls -1d /media/*/*.git`; do ln -s "$i" 2>/dev/null || true; done; /etc/cron.d/usb-mount-git-symlinks.sh || true; sudo chown -hR {USER}: \"$(/usr/bin/lsblk -o NAME,LABEL | grep %i | awk '{print $2}')\" || true; chmod 770 \"$(/usr/bin/lsblk -o NAME,LABEL | grep %i | awk '{print $2}')\""
 ExecStop=/bin/sh -c "/usr/bin/pumount /dev/%i; cd /opt/git; /etc/cron.d/usb-mount-git-symlinks.sh || true"
