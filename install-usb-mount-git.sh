@@ -15,13 +15,14 @@ install_usb_mount_git() {
 
   sudo cp -f 99-usb-mount-git.rules /etc/udev/rules.d/
   sudo udevadm control --reload-rules && sudo udevadm trigger
-  sudo systemctl daemon-reload
 
   sudo cp -f usb-mount-git-symlinks.sh /etc/cron.d/
   
   cat usb-mount-git-cron.tmpl | \
   sed "s/{USER}/$USER/g" | \
   sudo tee /etc/cron.d/usb-mount-git-cron
+
+  sudo systemctl daemon-reload
 }
 
 install_usb_mount_git
